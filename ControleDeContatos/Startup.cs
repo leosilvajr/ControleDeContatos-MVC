@@ -1,6 +1,9 @@
+using ControleDeContatos.Data;
+using ControleDeContatos.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +27,17 @@ namespace ControleDeContatos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+
+            //Esse serviço le as string de conexão digitada no arquivo JSON do appsettings
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<BancoContext>( o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            //Agora criar o Migration com o comando:  Add-Migration CriandoTabelaContatos -Context BancoContext
+            //Update-database
+
+            //Toda vez que a IContatoRepositorio for requisitada  a Injeção de independencia vai usar a ContatoRepositorio
+            services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

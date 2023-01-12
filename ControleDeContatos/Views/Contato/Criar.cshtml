@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ContatoModel
+
+@{
     ViewData["Title"] = "Adicionar Contato";
 }
 
@@ -8,19 +10,30 @@
     <h1 class="display-4">Adicionar Contato</h1>
 </div>
 
-<form>
+@*  
+    Adicionar Função no Botao Ciar
+    Ao clicar em adicionar ele vai fazer um submit que trabalha em cima de um formulario
+    asp-controller = qual é o controlador
+    asp-action     = qual ação
+    method         = Exemplo: post  *@
+
+@*    Mapear os input
+    asp-for = asp-for="Nome"*@
+
+
+<form asp-controller="Contato" asp-action="Criar" method="post">
 
     <div class="form-group">
         <label for="nome">Nome</label>
-        <input type="text" class="form-control"placeholder="Digite o nome do contato.">
+        <input type="text" asp-for="Nome" class="form-control"placeholder="Digite o nome do contato.">
     </div>
     <div class="form-group">
         <label for="nome">E-Mail</label>
-        <input type="text" class="form-control" placeholder="Digite o e-mail do contato.">
+        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o e-mail do contato.">
     </div>
     <div class="form-group">
         <label for="celular">Celular</label>
-        <input type="text" class="form-control" placeholder="Digite o celular do contato.">
+        <input type="text" asp-for="Celular" class="form-control" placeholder="Digite o celular do contato.">
     </div>
     <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
     <a class="btn btn-secondary btn-block" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
