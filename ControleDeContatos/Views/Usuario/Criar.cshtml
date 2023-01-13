@@ -1,0 +1,64 @@
+﻿@using ControleDeContatos.Enums;
+@model UsuarioModel
+
+@{
+    ViewData["Title"] = "Adicionar Usuário";
+}
+
+<div class="text-center">
+
+    <br />
+    <h1 class="display-4">Adicionar Usuário</h1>
+</div>
+
+@*  
+    Adicionar Função no Botao Ciar
+    Ao clicar em adicionar ele vai fazer um submit que trabalha em cima de um formulario
+    asp-controller = qual é o controlador
+    asp-action     = qual ação
+    method         = Exemplo: post  *@
+
+@*    Mapear os input
+    asp-for = asp-for="Nome"*@
+
+
+<form asp-controller="Usuario" asp-action="Criar" method="post">
+
+    <div class="form-group">
+        <label for="nome" class="label">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control"placeholder="Digite o nome do Usuário.">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+
+    <div class="form-group">
+        <label for="nome"class="label">E-Mail</label>
+        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o e-mail do Usuário.">
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+
+    <div class="form-group">
+        <label for="nome" class="label">Login</label>
+        <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do Usuário.">
+        @Html.ValidationMessageFor(x => x.Login)
+    </div>
+
+    <div class="form-group">
+        <label for="nome" class="label">Perfil</label>
+@*        <input type="text" asp-for="Login" class="form-control" placeholder="Digite o login do Usuário.">*@
+        <select asp-for="Perfil" class="form-control">
+            <option value="0"> Selecione </option>
+            <option value="@PerfilEnum.Admin"> Administrador </option>
+            <option value="@PerfilEnum.Padrao"> Padrão </option>
+        </select>
+    </div>
+
+        <div class="form-group">
+        <label for="nome" class="label">Senha</label>
+        <input type="password" asp-for="Senha" class="form-control" placeholder="Digite a senha do Usuário.">
+        @Html.ValidationMessageFor(x => x.Senha)
+    </div>
+
+
+    <button type="submit" class="btn btn-primary btn-block">Adicionar</button>
+    <a class="btn btn-secondary btn-block" asp-controller="Usuario" asp-action="Index" role="button">Voltar</a>
+</form>

@@ -37,6 +37,7 @@ namespace ControleDeContatos
 
             //Toda vez que a IContatoRepositorio for requisitada  a Injeção de independencia vai usar a ContatoRepositorio
             services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
         }
 
