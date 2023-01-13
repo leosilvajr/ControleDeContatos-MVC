@@ -26,6 +26,12 @@ namespace ControleDeContatos.Controllers
             return View();
         }
 
+        public IActionResult Editar(int id)
+        {
+            UsuarioModel usuario = _usuarioRepositorio.BuscarPorId(id);
+            return View(usuario);
+        }
+
         public IActionResult ApagarConfirmacao(int id)
         {
             //Retornar os dados do usuario preenchido.
@@ -75,6 +81,36 @@ namespace ControleDeContatos.Controllers
             {
                 TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar seu usuário, tente novamente, detalhe do erro: {e.Message}";
                 return RedirectToAction("Index");   
+            }
+        }
+
+        public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenhaModel)
+        {
+            try
+            {
+                UsuarioModel usuario = null;
+
+                if (ModelState.IsValid)
+                {
+                    usuario = new UsuarioModel()
+                    {
+                        Id = usuarioSemSenhaModel.Id,
+                        Nome = usuarioSemSenhaModel.Nome,
+                        Login = usuarioSemSenhaModel.Login,
+                        Email = usuarioSemSenhaModel.Email,
+                        Perfil = usuarioSemSenhaModel.Perfil
+                    };
+
+                    usuario = _usuarioRepositorio.Atualizar(usuario);
+                    TempData["MensagemSucesso"] = "Usuario alterado com sucesso.";
+                    return RedirectToAction("Index");
+                }
+                return View(usuario); //Forçando a retornar para uma view com nome Editar
+            }
+            catch (Exception e)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu usuario, tente novamente, detalhe do erro: {e.Message}";
+                return View("Index"); //Forçando a retornar para uma view com nome Editar
             }
         }
     }

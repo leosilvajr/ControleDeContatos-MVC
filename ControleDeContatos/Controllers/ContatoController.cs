@@ -90,14 +90,14 @@ namespace ControleDeContatos.Controllers
                 if (ModelState.IsValid)
                 {
                     _contatoRepositorio.Atualizar(contato);
-                    TempData["MensagemSucesso"] = "Contato cadastrado com sucesso.";
+                    TempData["MensagemSucesso"] = "Contato alterado com sucesso.";
                     return RedirectToAction("Index");
                 }
                 return View("Editar", contato); //Forçando a retornar para uma view com nome Editar
             }
             catch (Exception e)
             {
-                TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar seu contato, tente novamente, detalhe do erro: {e.Message}";
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu contato, tente novamente, detalhe do erro: {e.Message}";
                 return View("Editar", contato); //Forçando a retornar para uma view com nome Editar
             }
         }
