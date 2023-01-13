@@ -82,7 +82,7 @@ namespace ControleDeContatos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenhaModel)
+        public IActionResult Editar(UsuarioSemSenhaModel usuarioSemSenhaModel)
         {
             try
             {
