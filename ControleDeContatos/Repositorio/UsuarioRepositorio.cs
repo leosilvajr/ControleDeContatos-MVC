@@ -60,7 +60,7 @@ namespace ControleDeContatos.Repositorio
                 throw new Exception("Houve um erro na deleção do usuario.");
             }
 
-            _context.Usuarios.Update(usuarioDB);
+            _context.Usuarios.Remove(usuarioDB);
             _context.SaveChanges();
             return true;
 
