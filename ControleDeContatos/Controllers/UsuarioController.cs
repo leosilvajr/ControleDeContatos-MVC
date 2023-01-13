@@ -9,12 +9,10 @@ namespace ControleDeContatos.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
-
         public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
         {
             _usuarioRepositorio = usuarioRepositorio;
         }
-
         public IActionResult Index()
         {
             List<UsuarioModel> usarios = _usuarioRepositorio.BuscarTodos();
@@ -25,7 +23,6 @@ namespace ControleDeContatos.Controllers
         {
             return View();
         }
-
         public IActionResult Editar(int id)
         {
             UsuarioModel usuario = _usuarioRepositorio.BuscarPorId(id);
@@ -84,6 +81,7 @@ namespace ControleDeContatos.Controllers
             }
         }
 
+        [HttpPost]
         public IActionResult Alterar(UsuarioSemSenhaModel usuarioSemSenhaModel)
         {
             try
@@ -102,15 +100,16 @@ namespace ControleDeContatos.Controllers
                     };
 
                     usuario = _usuarioRepositorio.Atualizar(usuario);
-                    TempData["MensagemSucesso"] = "Usuario alterado com sucesso.";
+                    TempData["MensagemSucesso"] = "Usuário alterado com sucesso!";
                     return RedirectToAction("Index");
                 }
-                return View(usuario); //Forçando a retornar para uma view com nome Editar
+
+                return View(usuario);
             }
-            catch (Exception e)
+            catch (Exception erro)
             {
-                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu usuario, tente novamente, detalhe do erro: {e.Message}";
-                return View("Index"); //Forçando a retornar para uma view com nome Editar
+                TempData["MensagemErro"] = $"Ops, não conseguimos atualizar seu usuário, tente novamante, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
             }
         }
     }

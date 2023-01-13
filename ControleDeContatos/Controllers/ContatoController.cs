@@ -15,17 +15,14 @@ namespace ControleDeContatos.Controllers
         }
         public IActionResult Index()
         {
-            // ou var
             List<ContatoModel> contatos = _contatoRepositorio.BuscarTodos();
             return View(contatos);
         }
 
-        //Metodo Get = Apenas para carregar Tela
         public IActionResult Criar()
         {
             return View();
         }
-
         public IActionResult Editar(int id)
         {
             ContatoModel contato = _contatoRepositorio.ListarPorId(id);
