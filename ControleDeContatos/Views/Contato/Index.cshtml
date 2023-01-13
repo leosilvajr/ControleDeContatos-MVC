@@ -9,9 +9,36 @@
         <a class="btn btn-success" role="button" asp-controller="Contato" asp-action="Criar">Adicionar</a>
     </div>
 <br />
+
+
+
+@*    Evento de Fechar alert Incluido no site.js
+    $('.close-alert').click(function () {
+    $('.alert').hide('hide');
+    });*@
+
+    @if(TempData["MensagemSucesso"] != null){
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">x</button>
+        @TempData["MensagemSucesso"]
+    </div>
+    }    
+
+    @if (TempData["MensagemErro"] != null)
+    {
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" arial-label="Close">x</button>
+        @TempData["MensagemErro"]
+    </div>        
+    }
+
+    <br />
+
+
+
 <h1 class="display-4">Listagem de Contatos</h1>
 
-<table class="table">
+<table class="table" id="table-contatos"> @*id = table-contatos, esse nome foi dado pra ser reconhecido na jquery em wwwroot/js/site.js*@
     <thead class="table-success">
         <tr>
             <th scope="col">#</th>
